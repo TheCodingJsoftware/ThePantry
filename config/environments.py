@@ -20,7 +20,7 @@ class Environment:
     POSTGRES_TIMEOUT = int(os.getenv("POSTGRES_TIMEOUT", 5))
     POSTGRES_COMMAND_TIMEOUT = int(os.getenv("POSTGRES_COMMAND_TIMEOUT", 30))
     POSTGRES_MAX_INACTIVE_CONNECTION_LIFETIME = int(os.getenv("POSTGRES_MAX_INACTIVE_CONNECTION_LIFETIME", 60))
-    PORT = int(os.getenv("PORT", 5061))
+    PORT = int(os.getenv("PORT", 5000))
     DEBUG = os.getenv("DEBUG", "false").lower() == "true"
     DATA_PATH = os.getenv("DATA_PATH", "")
     COOKIE_SECRET = os.getenv("COOKIE_SECRET", "secret")

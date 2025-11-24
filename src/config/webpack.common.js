@@ -34,6 +34,7 @@ const htmlPlugins = Object.keys(entries)
                 template: templatePath,
                 filename: `${name}.html`,
                 chunks: [name, `vendors~${name}`],
+                publicPath: "/dist/",
             });
         }
         console.warn(`⚠️ No HTML template found for: ${templatePath}`);

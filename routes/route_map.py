@@ -18,7 +18,7 @@ static_routes = [
             "path": os.path.abspath("dist/static"),
         },
     ),
-    route(r"/dist/(.*)", CustomStaticFileHandler, path="public"),
+    route(r"/dist/(.*)", CustomStaticFileHandler, path="dist"),
     route(
         r"/(favicon\.ico|manifest\.json|robots\.txt|apple-touch-icon\.png|service-worker\.js|service-worker\.js\.map|workbox-.*\.js|workbox-.*\.js\.map|icon\.png)",
         CustomStaticFileHandler,

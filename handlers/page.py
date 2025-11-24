@@ -1,7 +1,15 @@
+from typing import Any, Awaitable
+
+from tornado.httputil import HTTPServerRequest
+from tornado.web import Application
+
 from handlers.base import BaseHandler
 
 
 class PageHandler(BaseHandler):
+    def __init__(self, application: Application, request: HTTPServerRequest, **kwargs: Any) -> None:
+        super().__init__(application, request, **kwargs)
+
     def initialize(
         self,
         template_name: str,
@@ -19,6 +27,9 @@ class PageHandler(BaseHandler):
         # For preflight requests
         self.set_status(204)
         self.finish()
+
+    def data_received(self, chunk: bytes) -> Awaitable[None] | None:
+        return super().data_received(chunk)
 
     def get(self):
         self.render_template(self.template_name, **self.extra_context)

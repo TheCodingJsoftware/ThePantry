@@ -11,7 +11,7 @@ def urlencode_path_segment(value: str) -> str:
     return urllib.parse.quote(value, safe="")
 
 
-loader = jinja2.FileSystemLoader("public/html")
+loader = jinja2.FileSystemLoader("dist")
 env = jinja2.Environment(loader=loader)
 env.filters["urlencode_path"] = urlencode_path_segment
 

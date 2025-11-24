@@ -14,7 +14,7 @@
   "author": "Jared Gross",
   "scripts": {
     "dev:frontend": "npx webpack --config src/config/webpack.dev.js --watch",
-    "dev:backend": "python3 main.py",
+    "dev:backend": "./.venv/bin/python main.py",
     "dev": "concurrently -k -n WEBPACK,BACKEND \"npm run dev:frontend\" \"npm run dev:backend\"",
     "build": "webpack --config src/config/webpack.prod.js"
   },

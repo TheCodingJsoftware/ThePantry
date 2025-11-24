@@ -1,3 +1,5 @@
+import os
+
 import tornado
 from tornado.ioloop import IOLoop
 
@@ -9,7 +11,14 @@ setup_logging()
 
 
 def make_app():
-    return tornado.web.Application(route_map.routes, cookie_secret=Environment.COOKIE_SECRET, websocket_ping_interval=25, websocket_ping_timeout=25, debug=Environment.DEBUG)
+    return tornado.web.Application(
+        route_map.routes,
+        template_path=os.path.abspath("dist"),
+        cookie_secret=Environment.COOKIE_SECRET,
+        websocket_ping_interval=25,
+        websocket_ping_timeout=25,
+        debug=Environment.DEBUG,
+    )
 
 
 def shutdown():
