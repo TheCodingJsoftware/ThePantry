@@ -2,6 +2,7 @@ import logging
 import traceback
 import urllib.parse
 from concurrent.futures import ThreadPoolExecutor
+from typing import Awaitable
 
 import jinja2
 from tornado.web import RequestHandler
@@ -22,9 +23,9 @@ class BaseHandler(RequestHandler):
     def write_error(self, status_code: int, **kwargs):
         if exc_info := kwargs.get("exc_info"):
             tb_str = "".join(traceback.format_exception(*exc_info))
-            logging.error(f"[{self.__class__.__name__}] Exception in handler:\n{tb_str}")
+            logging.error("[%s] Exception in handler:\n%s", self.__class__.__name__, tb_str)
         else:
-            logging.error(f"[{self.__class__.__name__}] Unknown error with status code {status_code}")
+            logging.error("[%s] Unknown error with status code", status_code)
 
         self.set_header("Content-Type", "application/json")
         self.finish({"error": f"Server error (status: {status_code})"})
@@ -38,3 +39,6 @@ class BaseHandler(RequestHandler):
         self.set_header("Cache-Control", "max-age=3600")
         self.set_header("Content-Type", "text/html")
         self.write(rendered_template)
+
+    def data_received(self, chunk: bytes) -> Awaitable[None] | None:
+        return super().data_received(chunk)
