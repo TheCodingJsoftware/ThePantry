@@ -9,7 +9,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: admin
-      POSTGRES_PASSWORD: Pine2admin
+      POSTGRES_PASSWORD: Password
       POSTGRES_HOST: db        # docker-internal hostname
       POSTGRES_PORT: 5432
       POSTGRES_DB: picklist
@@ -26,7 +26,7 @@ services:
     environment:
       POSTGRES_DB: picklist
       POSTGRES_USER: admin
-      POSTGRES_PASSWORD: Pine2admin
+      POSTGRES_PASSWORD: Password
       TZ: America/Winnipeg
     volumes:
       - pgdata:/var/lib/postgresql/data
