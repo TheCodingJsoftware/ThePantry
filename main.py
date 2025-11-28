@@ -1,4 +1,3 @@
-import asyncio
 import os
 
 import tornado.httpserver
@@ -25,19 +24,15 @@ def make_app():
 
 
 async def async_init():
-    """Async setup before Tornado starts."""
     await init_master_pool()
 
 
 if __name__ == "__main__":
-    # 1. Run async initialization FIRST inside Tornado's own IOLoop
     IOLoop.current().run_sync(async_init)
 
-    # 2. Prepare and start server
     app = tornado.httpserver.HTTPServer(make_app(), xheaders=True)
     app.listen(Environment.PORT, address="0.0.0.0")
 
     print(f"Backend running on port {Environment.PORT}...")
 
-    # 3. Start the Tornado IOLoop (forever)
     IOLoop.current().start()
