@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   app:
     image: jarebear/picklist:latest
@@ -10,14 +8,14 @@ services:
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: Password
-      POSTGRES_HOST: db        # docker-internal hostname
+      POSTGRES_HOST: db
       POSTGRES_PORT: 5432
       POSTGRES_DB: picklist
       TZ: America/Winnipeg
     ports:
-      - "5000:5000"
+      - "5010:5000"
     volumes:
-      - /mnt/rootshare/PickList:/app/data  # persistent app data folder
+      - /mnt/rootshare/PickList:/app/data
 
   db:
     image: postgres:16
@@ -31,7 +29,7 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
     ports:
-      - "5432:5432"  # exposed for local dev tools (DBeaver, TablePlus, etc.)
+      - "5432:5432"
 
 volumes:
   pgdata:
