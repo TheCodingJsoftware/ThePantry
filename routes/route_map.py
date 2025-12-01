@@ -1,6 +1,6 @@
 import os
 
-from handlers.colony_items import ColonyItemsPageHandler
+from handlers.colony_items import ColonyItemsAPIGetHandler, ColonyItemsPageHandler
 from handlers.colony_page import ColonyPageHandler
 from handlers.colony_settings import ColonySettingsAPIHandler, ColonySettingsPageHandler
 from handlers.login import ColonyAdminLoginHandler
@@ -23,7 +23,12 @@ page_routes = [
     route(r"/([a-z0-9_\-]+)", ColonyPageHandler, name="colony_dashboard"),
 ]
 
-api_routes = [route(r"/api/register", RegisterHandler, name="register_api"), route(r"/api/colony/([a-z0-9_\-]+)/settings", ColonySettingsAPIHandler, name="colony_settings_api")]
+api_routes = [
+    route(r"/api/register", RegisterHandler, name="register_api"),
+    route(r"/api/colony/([a-z0-9_\-]+)/settings", ColonySettingsAPIHandler, name="colony_settings_api"),
+    route(r"/api/colony/([a-z0-9_\-]+)/items", ColonyItemsAPIGetHandler, name="colony_get_items_api"),
+    route(r"/api/colony/([a-z0-9_\-]+)/items/add", ColonyItemsPageHandler, name="colony_add_item_api"),
+]
 
 static_routes = [
     (

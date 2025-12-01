@@ -15,7 +15,6 @@ CREATE TABLE IF NOT EXISTS colony_items (
     points_per_item INTEGER NOT NULL CHECK (points_per_item > 0),
 
     -- Media
-    image_path TEXT,
     thumbnail_path TEXT,
 
     -- External references

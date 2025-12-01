@@ -7,7 +7,7 @@
     <title>{{colony_name.title().replace("_", " ")}}</title>
     <link rel="icon" type="image/png" href="/uploaded_banners/{{banner_file}}">
   </head>
-  <body class="dark" data-theme="{{theme_color}}">
+  <body class="dark" data-theme="{{theme_color}}" data-colony="{{colony_name}}">
     <nav class="left max l">
       <header>
         <nav>
@@ -55,6 +55,7 @@
       <img src="/uploaded_banners/{{banner_file}}" class="responsive round medium-height">
       <h3>Welcome!</h3>
       <h5>Your pantry, your choice!</h5>
+        <colony-items></colony-items>
         <footer-component></footer-component>
     </main>
   </body>
