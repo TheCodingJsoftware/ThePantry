@@ -159,6 +159,125 @@ class ColonyItemsPageHandler(BaseHandler):
             return self.finish({"error": str(e)})
 
 
+class ColonyItemsAPIUpdateHandler(BaseHandler):
+    @require_role("admin")
+    async def post(self, colony_name: str, *args, **kwargs):
+        try:
+            colony_identifier = colony_name.lower()
+            logging.info(f"[UPDATE ITEM] Colony: {colony_identifier}")
+
+            # --------------------------------------------------
+            # Fetch colony DB name
+            # --------------------------------------------------
+            master_pool = await get_master_pool()
+            async with master_pool.acquire() as conn:
+                colony = await conn.fetchrow(
+                    """
+                    SELECT database_name
+                    FROM colonies
+                    WHERE colony_name = $1
+                    """,
+                    colony_identifier,
+                )
+
+            if not colony:
+                self.set_status(404)
+                return self.finish({"error": "Colony not found"})
+
+            colony_db = colony["database_name"]
+
+            colony_dsn = f"postgres://{Environment.POSTGRES_USER}:{Environment.POSTGRES_PASSWORD}@{Environment.POSTGRES_HOST}:{Environment.POSTGRES_PORT}/{colony_db}"
+
+            colony_conn = await asyncpg.connect(colony_dsn)
+
+            # --------------------------------------------------
+            # FORM FIELDS
+            # --------------------------------------------------
+            item_id = int(self.get_body_argument("id"))
+
+            name = self.get_body_argument("name")
+            description = self.get_body_argument("description", None)
+            points_per_item = int(self.get_body_argument("points_per_item"))
+
+            website_url = self.get_body_argument("website_url", None)
+            category = self.get_body_argument("category", None)
+            tags_raw = self.get_body_argument("tags", "")
+
+            is_active = self.get_body_argument("is_active", "true") == "true"
+            max_allowed_raw = self.get_body_argument("max_allowed", None)
+            default_quantity = int(self.get_body_argument("default_quantity", "1"))
+
+            tags = [t.strip() for t in tags_raw.split(",") if t.strip()]
+            max_allowed = int(max_allowed_raw) if max_allowed_raw not in (None, "", "null") else None
+
+            # --------------------------------------------------
+            # OPTIONAL THUMBNAIL UPLOAD
+            # --------------------------------------------------
+            thumb_meta = self.request.files.get("thumbnail")
+            thumbnail_filename = None
+
+            if thumb_meta:
+                fileinfo = thumb_meta[0]
+                original_name = fileinfo["filename"]
+                ext = os.path.splitext(original_name)[1]
+
+                thumbnail_filename = f"{uuid.uuid4().hex}{ext}"
+
+                save_dir = f"{Environment.DATA_PATH}/uploaded_thumbnails/"
+                os.makedirs(save_dir, exist_ok=True)
+
+                save_path = os.path.join(save_dir, thumbnail_filename)
+
+                with open(save_path, "wb") as f:
+                    f.write(fileinfo["body"])
+
+                logging.info(f"[UPDATE ITEM] New thumbnail saved: {thumbnail_filename}")
+
+            # --------------------------------------------------
+            # UPDATE SQL
+            # --------------------------------------------------
+            sql = """
+                UPDATE colony_items
+                SET
+                    name = $1,
+                    description = $2,
+                    points_per_item = $3,
+                    website_url = $4,
+                    category = $5,
+                    tags = $6,
+                    is_active = $7,
+                    max_allowed = $8,
+                    default_quantity = $9,
+                    updated_at = NOW(),
+                    thumbnail_path = COALESCE($10, thumbnail_path)
+                WHERE id = $11
+            """
+
+            await colony_conn.execute(
+                sql,
+                name,
+                description,
+                points_per_item,
+                website_url,
+                category,
+                tags,
+                is_active,
+                max_allowed,
+                default_quantity,
+                thumbnail_filename,  # only overwrites if provided
+                item_id,
+            )
+
+            await colony_conn.close()
+
+            return self.finish({"success": True})
+
+        except Exception as e:
+            logging.exception("Error in ColonyItemsAPIUpdateHandler:")
+            self.set_status(400)
+            return self.finish({"error": str(e)})
+
+
 class ColonyItemsAPIGetHandler(BaseHandler):
     @require_role("admin")
     async def get(self, colony_name: str, *args, **kwargs):

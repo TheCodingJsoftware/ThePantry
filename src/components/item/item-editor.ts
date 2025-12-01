@@ -93,11 +93,6 @@ export class ItemEditor extends HTMLElement {
             this.querySelector<HTMLInputElement>("#thumbnail")?.click()
         );
 
-        this.querySelector("#image")?.addEventListener("change", (e: any) => {
-            const file = e.target.files?.[0];
-            if (file) this.querySelector("#image-name")!.textContent = file.name;
-        });
-
         this.querySelector("#thumbnail")?.addEventListener("change", (e: any) => {
             const file = e.target.files?.[0];
             if (file) this.querySelector("#thumbnail-name")!.textContent = file.name;
@@ -133,7 +128,6 @@ export class ItemEditor extends HTMLElement {
             data.default_quantity ?? 1;
 
         // Media filenames if already stored
-        this.querySelector("#image-name")!.textContent = data.image_path ?? "";
         this.querySelector("#thumbnail-name")!.textContent = data.thumbnail_path ?? "";
     }
 

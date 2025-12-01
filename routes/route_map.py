@@ -1,6 +1,6 @@
 import os
 
-from handlers.colony_items import ColonyItemsAPIGetHandler, ColonyItemsPageHandler
+from handlers.colony_items import ColonyItemsAPIGetHandler, ColonyItemsAPIUpdateHandler, ColonyItemsPageHandler
 from handlers.colony_page import ColonyPageHandler
 from handlers.colony_settings import ColonySettingsAPIHandler, ColonySettingsPageHandler
 from handlers.login import ColonyAdminLoginHandler
@@ -28,6 +28,7 @@ api_routes = [
     route(r"/api/colony/([a-z0-9_\-]+)/settings", ColonySettingsAPIHandler, name="colony_settings_api"),
     route(r"/api/colony/([a-z0-9_\-]+)/items", ColonyItemsAPIGetHandler, name="colony_get_items_api"),
     route(r"/api/colony/([a-z0-9_\-]+)/items/add", ColonyItemsPageHandler, name="colony_add_item_api"),
+    route(r"/api/colony/([a-z0-9_\-]+)/items/update", ColonyItemsAPIUpdateHandler, name="colony_update_item_api"),
 ]
 
 static_routes = [
@@ -45,6 +46,7 @@ static_routes = [
         path="dist",
     ),
     route(r"/uploaded_banners/(.*)", CustomStaticFileHandler, path=os.path.join(os.getenv("DATA_PATH", "data"), "uploaded_banners")),
+    route(r"/uploaded_thumbnails/(.*)", CustomStaticFileHandler, path=os.path.join(os.getenv("DATA_PATH", "data"), "uploaded_thumbnails")),
 ]
 
 routes = api_routes + static_routes + page_routes

@@ -150,7 +150,7 @@ export class RegisterComponent extends HTMLElement {
             this.selectedBannerFile = null;
 
             const img = this.querySelector("#colony-banner") as HTMLImageElement;
-            img.src = "/static/images/placeholder-banner.png";
+            img.src = "/uploaded_banners/placeholder-banner.png";
 
             // Clear file input
             const input = this.querySelector("#banner-input") as HTMLInputElement;

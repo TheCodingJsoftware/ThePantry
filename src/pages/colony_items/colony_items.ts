@@ -4,6 +4,7 @@ import "@utils/theme"
 import "@components/common/footer/footer-component"
 import "@components/common/button/help-button"
 import "@components/common/button/share-button"
+import "@components/common/button/add-item-button"
 import "@components/item/item-element";
 import "@components/colony/colony-items";
 

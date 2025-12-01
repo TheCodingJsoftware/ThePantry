@@ -1,8 +1,3 @@
--- ============================================================
--- Colony Schema Initialization
--- Tables that belong to EACH colony database
--- ============================================================
-
 -- ============= ITEMS TABLE =============
 CREATE TABLE IF NOT EXISTS colony_items (
     id SERIAL PRIMARY KEY,
@@ -24,6 +19,13 @@ CREATE TABLE IF NOT EXISTS colony_items (
     category TEXT,
     tags TEXT[],
 
+    -- Vendor (NEW)
+    vendor TEXT,
+
+    -- Item code as text (NEW)
+    item_number TEXT,
+    model_number TEXT,
+
     -- Restriction rules
     is_active BOOLEAN NOT NULL DEFAULT TRUE,
     max_allowed INTEGER CHECK (max_allowed >= 0),
@@ -36,26 +38,5 @@ CREATE TABLE IF NOT EXISTS colony_items (
 
 CREATE INDEX IF NOT EXISTS idx_colony_items_name ON colony_items (name);
 CREATE INDEX IF NOT EXISTS idx_colony_items_category ON colony_items (category);
-
-
--- ============= OPTIONAL FUTURE TABLES =============
-
--- Items selected per user (shopping history)
-CREATE TABLE IF NOT EXISTS colony_item_selections (
-    id SERIAL PRIMARY KEY,
-    item_id INTEGER NOT NULL REFERENCES colony_items(id) ON DELETE CASCADE,
-    username TEXT NOT NULL,
-    quantity INTEGER NOT NULL DEFAULT 1 CHECK (quantity > 0),
-    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-);
-
-CREATE INDEX IF NOT EXISTS idx_item_selections_user ON colony_item_selections(username);
-CREATE INDEX IF NOT EXISTS idx_item_selections_item ON colony_item_selections(item_id);
-
--- Logging actions (admin, edits, etc.)
-CREATE TABLE IF NOT EXISTS colony_logs (
-    id SERIAL PRIMARY KEY,
-    event_type TEXT NOT NULL,
-    payload JSONB,
-    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-);
+CREATE INDEX IF NOT EXISTS idx_colony_items_vendor ON colony_items (vendor);
+CREATE INDEX IF NOT EXISTS idx_colony_items_item_code ON colony_items (item_code);
