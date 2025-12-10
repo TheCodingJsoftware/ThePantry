@@ -12,6 +12,7 @@ services:
       POSTGRES_PORT: 5432
       POSTGRES_DB: thepantry
       TZ: America/Winnipeg
+      PORT: 5010
       DATA_PATH: /app/data
     ports:
       - "5010:5000"
