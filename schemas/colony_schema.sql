@@ -39,4 +39,4 @@ CREATE TABLE IF NOT EXISTS colony_items (
 CREATE INDEX IF NOT EXISTS idx_colony_items_name ON colony_items (name);
 CREATE INDEX IF NOT EXISTS idx_colony_items_category ON colony_items (category);
 CREATE INDEX IF NOT EXISTS idx_colony_items_vendor ON colony_items (vendor);
-CREATE INDEX IF NOT EXISTS idx_colony_items_item_code ON colony_items (item_code);
+CREATE INDEX IF NOT EXISTS idx_colony_items_item_number ON colony_items (item_number);
