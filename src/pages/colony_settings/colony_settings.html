@@ -1,65 +1,65 @@
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="google" content="notranslate">
-    <title>{{colony_name.title().replace("_", " ")}}</title>
-    <link rel="icon" type="image/png" href="/uploaded_banners/{{banner_file}}">
-  </head>
-  <body class="dark" data-theme="{{theme_color}}">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="google" content="notranslate">
+        <title>{{colony_name.title().replace("_", " ")}}</title>
+        <link rel="icon" type="image/png" href="/uploaded_banners/{{banner_file}}">
+    </head>
+    <body class="dark" data-theme="{{theme_color}}">
 
-    <nav class="left max l">
-      <header>
-        <nav>
-          <img src="/uploaded_banners/{{banner_file}}" class="circle extra">
-          <h6>{{colony_name.title().replace("_", " ")}}</h6>
+        <nav class="left max l">
+            <header>
+                <nav>
+                    <img src="/uploaded_banners/{{banner_file}}" class="circle extra">
+                    <h6>{{colony_name.title().replace("_", " ")}}</h6>
+                </nav>
+            </header>
+            <a href="/{{colony_name}}">
+                <i>home</i>
+                <div>Home</div>
+            </a>
+            <a href="/{{colony_name}}/items">
+                <i>edit</i>
+                <div>Edit Items</div>
+            </a>
+            <div class="divider"></div>
+            <a is="help-button"></a>
         </nav>
-      </header>
-      <a href="/{{colony_name}}">
-        <i>home</i>
-        <div>Home</div>
-      </a>
-      <a href="/{{colony_name}}/items">
-        <i>edit</i>
-        <div>Edit Items</div>
-      </a>
-      <div class="divider"></div>
-      <a is="help-button"></a>
-    </nav>
 
-    <nav class="left m">
-      <header>
-        <img src="/uploaded_banners/{{banner_file}}" class="circle extra">
-      </header>
-      <a href="/{{colony_name}}">
-        <i>home</i>
-        <div>Home</div>
-      </a>
-      <a href="/{{colony_name}}/items">
-        <i>edit</i>
-        <div>Edit Items</div>
-      </a>
-      <a is="help-button"></a>
-    </nav>
+        <nav class="left m">
+            <header>
+                <img src="/uploaded_banners/{{banner_file}}" class="circle extra">
+            </header>
+            <a href="/{{colony_name}}">
+                <i>home</i>
+                <div>Home</div>
+            </a>
+            <a href="/{{colony_name}}/items">
+                <i>edit</i>
+                <div>Edit Items</div>
+            </a>
+            <a is="help-button"></a>
+        </nav>
 
-    <nav class="bottom s">
-      <a href="/{{colony_name}}">
-        <i>home</i>
-      </a>
-      <a href="/{{colony_name}}/settings">
-        <i>settings</i>
-      </a>
-      <a is="help-button"></a>
-    </nav>
-    <main class="responsive">
-        <register-component
-            data-colony="{{colony_name.title().replace('_', ' ')}}"
-            data-username="{{username}}"
-            data-theme="{{theme_color}}"
-            data-banner="{{banner_file}}">
-        </register-component>
-        <footer-component></footer-component>
-    </main>
-  </body>
+        <nav class="bottom s">
+            <a href="/{{colony_name}}">
+                <i>home</i>
+            </a>
+            <a href="/{{colony_name}}/settings">
+                <i>settings</i>
+            </a>
+            <a is="help-button"></a>
+        </nav>
+        <main class="responsive">
+            <register-component
+                data-colony="{{colony_name.title().replace('_', ' ')}}"
+                data-username="{{username}}"
+                data-theme="{{theme_color}}"
+                data-banner="{{banner_file}}">
+            </register-component>
+            <footer-component></footer-component>
+        </main>
+    </body>
 </html>

@@ -1,64 +1,65 @@
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="google" content="notranslate">
-    <title>{{colony_name.title().replace("_", " ")}}</title>
-    <link rel="icon" type="image/png" href="/uploaded_banners/{{banner_file}}">
-  </head>
-  <body class="dark" data-theme="{{theme_color}}" data-colony="{{colony_name}}">
-    <nav class="left max l">
-      <header>
-        <nav>
-          <img src="/uploaded_banners/{{banner_file}}" class="circle extra">
-          <h6>{{colony_name.title().replace("_", " ")}}</h6>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="google" content="notranslate">
+        <title>{{colony_name.title().replace("_", " ")}}</title>
+        <link rel="icon" type="image/png" href="/uploaded_banners/{{banner_file}}">
+    </head>
+    <body class="dark" data-theme="{{theme_color}}" data-colony="{{colony_name}}">
+
+        <nav class="left max l">
+            <header>
+                <nav>
+                    <img src="/uploaded_banners/{{banner_file}}" class="circle extra">
+                    <h6>{{colony_name.title().replace("_", " ")}}</h6>
+                </nav>
+            </header>
+            <a href="/{{colony_name}}">
+                <i>home</i>
+                <div>Home</div>
+            </a>
+            <a href="/{{colony_name}}/settings">
+                <i>settings</i>
+                <div>Colony Settings</div>
+            </a>
+            <div class="divider"></div>
+            <a is="help-button"></a>
         </nav>
-      </header>
-      <a href="/{{colony_name}}">
-        <i>home</i>
-        <div>Home</div>
-      </a>
-      <a href="/{{colony_name}}/settings">
-        <i>settings</i>
-        <div>Colony Settings</div>
-      </a>
-      <div class="divider"></div>
-      <a is="help-button"></a>
-    </nav>
 
-    <nav class="left m">
-      <header>
-        <img src="/uploaded_banners/{{banner_file}}" class="circle extra">
-      </header>
-      <a href="/{{colony_name}}">
-        <i>home</i>
-        <div>Home</div>
-      </a>
-      <a href="/{{colony_name}}/settings">
-        <i>settings</i>
-        <div>Colony Settings</div>
-      </a>
-      <a is="help-button"></a>
-    </nav>
+        <nav class="left m">
+            <header>
+                <img src="/uploaded_banners/{{banner_file}}" class="circle extra">
+            </header>
+            <a href="/{{colony_name}}">
+                <i>home</i>
+                <div>Home</div>
+            </a>
+            <a href="/{{colony_name}}/settings">
+                <i>settings</i>
+                <div>Colony Settings</div>
+            </a>
+            <a is="help-button"></a>
+        </nav>
 
-    <nav class="bottom s">
-      <a href="/{{colony_name}}">
-        <i>home</i>
-      </a>
-      <a href="/{{colony_name}}/settings">
-        <i>settings</i>
-      </a>
-      <a is="help-button"></a>
-      <button class="square round extra" is="add-item-button"></button>
-    </nav>
-    <main class="responsive">
-      <img src="/uploaded_banners/{{banner_file}}" class="responsive round small-height">
-      <h3>Welcome!</h3>
-      <h5>Your pantry, your choice!</h5>
-        <colony-items></colony-items>
-        <button class="fixed bottom right margin extra" is="add-item-button"></button>
-        <footer-component></footer-component>
-    </main>
-  </body>
+        <nav class="bottom s">
+            <a href="/{{colony_name}}">
+                <i>home</i>
+            </a>
+            <a href="/{{colony_name}}/settings">
+                <i>settings</i>
+            </a>
+            <a is="help-button"></a>
+            <button class="square round extra" is="add-item-button"></button>
+        </nav>
+        <main class="responsive">
+            <img src="/uploaded_banners/{{banner_file}}" class="responsive round small-height">
+            <h3>Welcome!</h3>
+            <h5>Your pantry, your choice!</h5>
+            <colony-items></colony-items>
+            <button class="fixed bottom right margin extra" is="add-item-button"></button>
+            <footer-component></footer-component>
+        </main>
+    </body>
 </html>

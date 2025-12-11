@@ -1,81 +1,82 @@
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="google" content="notranslate">
-    <title>{{colony_name.title().replace("_", " ")}}</title>
-    <link rel="icon" type="image/png" href="/uploaded_banners/{{banner_file}}">
-  </head>
-  <body class="dark" data-theme="{{theme_color}}", data-colony="{{colony_name}}">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="google" content="notranslate">
+        <title>{{colony_name.title().replace("_", " ")}}</title>
+        <link rel="icon" type="image/png" href="/uploaded_banners/{{banner_file}}">
+    </head>
+    <body class="dark" data-theme="{{theme_color}}" , data-colony="{{colony_name}}">
 
-    <nav class="left max l">
-      <header>
-        <nav>
-          <img src="/uploaded_banners/{{banner_file}}" class="circle extra">
-          <h6>{{colony_name.title().replace("_", " ")}}</h6>
+        <nav class="left max l">
+            <header>
+                <nav>
+                    <img src="/uploaded_banners/{{banner_file}}" class="circle extra">
+                    <h6>{{colony_name.title().replace("_", " ")}}</h6>
+                </nav>
+            </header>
+            {% if not is_colony_admin %}
+            <a id="login-button">
+                <i>login</i>
+                <span>Login</span>
+            </a>
+            {% else %}
+            <a href="/{{colony_name}}/logout">
+                <i>logout</i>
+                <span>Logout</span>
+            </a>
+            {% endif %}
+            {% if is_colony_admin %}
+            <a href="/{{colony_name}}/items">
+                <i>edit</i>
+                <span>Edit Items</span>
+            </a>
+            <a href="/{{colony_name}}/settings">
+                <i>settings</i>
+                <span>Colony Settings</span>
+            </a>
+            {% endif %}
+            <a is="share-button"></a>
+            <div class="divider"></div>
+            <a is="help-button"></a>
         </nav>
-      </header>
-      {% if not is_colony_admin %}
-      <a id="login-button">
-        <i>login</i>
-        <span>Login</span>
-      </a>
-      {% else %}
-      <a href="/{{colony_name}}/logout">
-        <i>logout</i>
-        <span>Logout</span>
-      </a>
-      {% endif %}
-      {% if is_colony_admin %}
-      <a href="/{{colony_name}}/items">
-        <i>edit</i>
-        <span>Edit Items</span>
-      </a>
-      <a href="/{{colony_name}}/settings">
-        <i>settings</i>
-        <span>Colony Settings</span>
-      </a>
-      {% endif %}
-      <a is="share-button"></a>
-      <div class="divider"></div>
-      <a is="help-button"></a>
-    </nav>
 
-    <nav class="left m">
-      <header>
-        <img src="/uploaded_banners/{{banner_file}}" class="circle extra">
-      </header>
-      {% if is_colony_admin %}
-      <a href="/{{colony_name}}/items">
-        <i>edit</i>
-        <span>Edit Items</span>
-      </a>
-      <a href="/{{colony_name}}/settings">
-        <i>settings</i>
-        <span>Colony Settings</span>
-      </a>
-      {% endif %}
-      <a is="share-button"></a>
-      <a is="help-button"></a>
-    </nav>
+        <nav class="left m">
+            <header>
+                <img src="/uploaded_banners/{{banner_file}}" class="circle extra">
+            </header>
+            {% if is_colony_admin %}
+            <a href="/{{colony_name}}/items">
+                <i>edit</i>
+                <span>Edit Items</span>
+            </a>
+            <a href="/{{colony_name}}/settings">
+                <i>settings</i>
+                <span>Colony Settings</span>
+            </a>
+            {% endif %}
+            <a is="share-button"></a>
+            <a is="help-button"></a>
+        </nav>
 
-    <nav class="bottom s">
-      {% if is_colony_admin %}
-      <a href="/{{colony_name}}/items">
-        <i>edit</i>
-      </a>
-      <a href="/{{colony_name}}/settings">
-        <i>settings</i>
-      </a>
-      {% endif %}
-      <a is="share-button"></a>
-      <a is="help-button"></a>
-    </nav>
-    <main class="responsive">
-      <img src="/uploaded_banners/{{banner_file}}" class="responsive round medium-height">
-      <h3>Welcome!</h3>
-      <h5>Your pantry, your choice!</h5>
-    </main>
-  </body>
+        <nav class="bottom s">
+            {% if is_colony_admin %}
+            <a href="/{{colony_name}}/items">
+                <i>edit</i>
+            </a>
+            <a href="/{{colony_name}}/settings">
+                <i>settings</i>
+            </a>
+            {% endif %}
+            <a is="share-button"></a>
+            <a is="help-button"></a>
+        </nav>
+
+        <main class="responsive">
+            <img src="/uploaded_banners/{{banner_file}}" class="responsive round medium-height">
+            <h3>Welcome!</h3>
+            <h5>Your pantry, your choice!</h5>
+        </main>
+    </body>
 </html>

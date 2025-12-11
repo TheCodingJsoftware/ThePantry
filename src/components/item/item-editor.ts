@@ -22,7 +22,7 @@ export class ItemEditor extends HTMLElement {
 
             <!-- DESCRIPTION -->
             <div class="s12 field textarea label border bottom-margin">
-                <textarea id="description" rows="3"></textarea>
+                <textarea id="description"></textarea>
                 <label>Description</label>
             </div>
 
@@ -76,7 +76,7 @@ export class ItemEditor extends HTMLElement {
             <div class="s12 m6 l6 round field label border bottom-margin">
                 <input type="number" id="max_allowed" min="0" value="0">
                 <label>Max Allowed</label>
-                <span class="helper">0 = no limit</span>
+                <output>0 = no limit</output>
             </div>
 
             <!-- DEFAULT QUANTITY -->
